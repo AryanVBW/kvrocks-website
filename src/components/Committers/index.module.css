@@ -1,4 +1,12 @@
 .contributorAvatar {
     width: 50px;
     border-radius: 50%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Add hover effects to indicate the avatar is clickable */
+a:hover .contributorAvatar {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }

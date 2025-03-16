@@ -1,5 +1,6 @@
 import React from "react"
 import styles from "./index.module.css"
+import { getAvatarProps } from "../../services/AvatarService"
 
 type CommitterData = {
     name: string,
@@ -54,8 +55,14 @@ export default function Committers(): JSX.Element {
                 .sort((c0, c1) => c0.apacheId.localeCompare(c1.apacheId))
                 .map(v => (
                     <tr key={v.name}>
-                        <td><img width={64} className={styles.contributorAvatar}
-                                 src={`https://github.com/${v.githubId}.png`} alt={v.name}/></td>
+                        <td>
+                            <a href={`https://github.com/${v.githubId}`} target="_blank" rel="noopener noreferrer">
+                                <img 
+                                    className={styles.contributorAvatar}
+                                    {...getAvatarProps(v.githubId, v.name)}
+                                />
+                            </a>
+                        </td>
                         <td>{v.isPMC ? <b>{v.name}</b> : v.name}</td>
                         <td>{v.apacheId}</td>
                         <td><a target={"_blank"} href={`https://github.com/${v.githubId}`}>{v.githubId}</a></td>
