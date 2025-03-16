@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styles from "./index.module.css"
-import { getAvatarProps } from "../../services/AvatarService"
+import { getAvatarProps, checkAndUpdateAvatars } from "../../services/AvatarService"
 
 type CommitterData = {
     name: string,
@@ -40,6 +40,14 @@ const committers: CommitterData[] = [
 ]
 
 export default function Committers(): JSX.Element {
+    // Trigger automatic avatar updates when component mounts
+    useEffect(() => {
+        // Extract all GitHub IDs from committers
+        const githubIds = committers.map(committer => committer.githubId);
+        
+        // Check and update avatars if needed
+        checkAndUpdateAvatars(githubIds);
+    }, []);
     return <>
         <table>
             <thead>
